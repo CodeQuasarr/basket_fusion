@@ -12,7 +12,13 @@ test('users can authenticate using the login screen', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertNoContent();
+    $response->assertJson([
+        'user' => [
+            'id' => $user->getKey(),
+            'name' => $user->getName(),
+            'email' => $user->email,
+        ],
+    ]);
 });
 
 test('users can not authenticate with invalid password', function () {
