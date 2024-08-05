@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Clubs;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @property string $name
- * @property string $email
+ * @property string $logo
+ * @property string $city
+ * @property string $color_1
+ * @property string $color_2
  */
-class User extends Authenticatable
+class Club extends Model
 {
-    use HasFactory, Notifiable, HasApiTokens, softDeletes;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'email', 'password', 'weight', 'height', 'birth_date', 'number', 'created_at', 'updated_at', 'deleted_at'
+        'name', 'logo', 'city', 'color_1', 'color_2', 'created_at', 'updated_at', 'deleted_at'
     ];
 
     /**
@@ -31,10 +31,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = [];
 
     /**
      * Get the attributes that should be cast.
@@ -44,8 +41,9 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
         ];
     }
 
