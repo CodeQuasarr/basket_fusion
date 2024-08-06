@@ -4,6 +4,7 @@ namespace App\Models\Clubs;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -47,7 +48,22 @@ class Club extends Model
         ];
     }
 
+    /**************************************************************************
+     * Relationships
+     **************************************************************************/
 
+    /**
+     * @description Get the teams for the club.
+     * @return BelongsToMany
+     */
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class);
+    }
+
+    /**************************************************************************
+     * Methods
+     **************************************************************************/
     public function getName(): string
     {
         return $this->name;
